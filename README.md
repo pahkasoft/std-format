@@ -59,8 +59,8 @@ StdFormat.format("...");
 Use the standalone IIFE bundle via `unpkg` or `jsdelivr` cdn.
 
 ```html
-<script src="https://unpkg.com/std-format@4.0.2/dist/index.global.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/std-format@4.0.2/dist/index.global.js"></script>
+<script src="https://unpkg.com/std-format@4.1.0/dist/index.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/std-format@4.1.0/dist/index.global.js"></script>
 
 <script>
     const { format } = window.StdFormat;
