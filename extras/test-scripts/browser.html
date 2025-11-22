@@ -16,16 +16,22 @@
     <script src="../../node_modules/@sbrockma/std-format/dist/index.global.js"></script>
 
 	// Unpkg cdn
-    <script src="https://unpkg.com/@tspro/brace-format@4.0.2/dist/index.global.js"></script>
-    <script src="https://unpkg.com/@sbrockma/std-format@4.0.2/dist/index.global.js"></script>
+    <script src="https://unpkg.com/std-format@4.1.0/dist/index.global.js"></script>
+    <script src="https://unpkg.com/@sbrockma/std-format@4.1.0/dist/index.global.js"></script>
+    <script src="https://unpkg.com/@tspro/brace-format@4.1.0/dist/index.global.js"></script>
 
     // Jsdelivr cdn
-    <script src="https://cdn.jsdelivr.net/npm/@tspro/brace-format@4.0.2/dist/index.global.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@sbrockma/std-format@4.0.2/dist/index.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/std-format@4.1.0/dist/index.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@sbrockma/std-format@4.1.0/dist/index.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tspro/brace-format@4.1.0/dist/index.global.js"></script>
     -->
 
-    <script src="../../node_modules/@tspro/brace-format/dist/index.global.js"></script>
+    <script src="../../node_modules/std-format/dist/index.global.js"></script>
+    <script>var Format1 = StdFormat;</script>
     <script src="../../node_modules/@sbrockma/std-format/dist/index.global.js"></script>
+    <script>var Format2 = StdFormat;</script>
+    <script src="../../node_modules/@tspro/brace-format/dist/index.global.js"></script>
+    <script>var Format3 = BraceFormat;</script>
 
     <script src="../../node_modules/@tspro/test-format-lib/index.js"></script>
 
@@ -37,10 +43,13 @@
         }
 
         add("<p>");
-        testFormatLib(BraceFormat, str => add(str + "<br />"));
+        testFormatLib(Format1, str => add(str + "<br />"));
         add("</p>");
         add("<p>");
-        testFormatLib(StdFormat, str => add(str + "<br />"));
+        testFormatLib(Format2, str => add(str + "<br />"));
+        add("</p>");
+        add("<p>");
+        testFormatLib(Format3, str => add(str + "<br />"));
         add("</p>");
     </script>
 </body>
