@@ -5,8 +5,9 @@
     "description": "",
     "dependencies": {
         "@mdi/js": "^7.4.47",
-        "@sbrockma/std-format": "file:../../dist/sbrockma-std-format",
-        "@tspro/brace-format": "file:../../dist/tspro-brace-format",
+        "std-format": "^4.1.0",
+        "@sbrockma/std-format": "^4.1.0",
+        "@tspro/brace-format": "^4.1.0",
         "bootstrap": "^5.3.5",
         "core-js": "^3.41.0",
         "react": "^19.1.0",
