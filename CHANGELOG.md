@@ -1,5 +1,5 @@
 # Changelog
-## [4.1.0] - 2025-11-??
+## [4.1.0] - 2025-11-22
 ### Changed
 - Rebrand as `StdFormat` and unscoped `std-format` package.
 - Keep legacy support for other variants.
