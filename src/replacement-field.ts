@@ -103,9 +103,6 @@ export class ArrayPresentation extends PresentationParser {
     readonly widthFieldId: string | undefined;
     readonly type: "" | "d" | "n" | "b" | "s" | "m";
 
-    readonly leftBrace: "" | "[" | "{";
-    readonly rightBrace: "" | "]" | "}";
-
     constructor(p: FormatStringParser, str: string) {
         super(str);
 
@@ -124,10 +121,54 @@ export class ArrayPresentation extends PresentationParser {
         if (this.parsePos !== this.parseStr.length) {
             p.throwInvalidFormatSpecifiers(this.parseStr.substring(this.parsePos));
         }
+    }
 
-        // Solve left and right braces.
-        this.leftBrace = this.type === "n" || this.type === "s" ? "" : (this.type === "b" ? "{" : "[");
-        this.rightBrace = this.type === "n" || this.type === "s" ? "" : (this.type === "b" ? "}" : "]");
+    get arrayLeftBrace(): string {
+        switch (this.type) {
+            case "n": case "s": return "";
+            case "b": return "{";
+            default: return "[";
+        }
+    }
+
+    get arrayRightBrace(): string {
+        switch (this.type) {
+            case "n": case "s": return "";
+            case "b": return "}";
+            default: return "]";
+        }
+    }
+
+    get mapLeftBrace(): string {
+        switch (this.type) {
+            case "n": case "s": return "";
+            case "m": case "b": return "{";
+            default: return "[";
+        }
+    }
+
+    get mapRightBrace(): string {
+        switch (this.type) {
+            case "n": case "s": return "";
+            case "m": case "b": return "}";
+            default: return "]";
+        }
+    }
+
+    get mapEntryLeftBrace(): string {
+        switch (this.type) {
+            case "n": case "s": case "m": return "";
+            case "b": return "{";
+            default: return "[";
+        }
+    }
+
+    get mapEntryRightBrace(): string {
+        switch (this.type) {
+            case "n": case "s": case "m": return "";
+            case "b": return "}";
+            default: return "]";
+        }
     }
 }
 
@@ -318,9 +359,8 @@ export class ReplacementField {
         this.arrayPresentations = apStrings.map(apString => new ArrayPresentation(p, apString));
 
         // Create default array presentation.
-        if (!ReplacementField.defaultArrayPresentation) {
+        if (!ReplacementField.defaultArrayPresentation)
             ReplacementField.defaultArrayPresentation = new ArrayPresentation(p, "");
-        }
     }
 
     // Get element presentation.

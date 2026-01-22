@@ -236,18 +236,16 @@ export class FormatStringParser {
             totArrayDepth ??= getArrayDepth(arg);
             curArrayDepth ??= 0
 
-            let ap = rf.getArrayPresentation(curArrayDepth, totArrayDepth);
+            const ap = rf.getArrayPresentation(curArrayDepth, totArrayDepth);
 
-            argStr = ap.leftBrace;
+            argStr = ap.arrayLeftBrace;
 
             for (let i = 0; i < arg.length; i++) {
-                if (i > 0 && ap.type !== "s") {
-                    argStr += ", ";
-                }
+                if (i > 0 && ap.type !== "s") argStr += ", ";
                 argStr += this.formatArgument(arg[i], rf, curArrayDepth + 1, totArrayDepth);
             }
 
-            argStr += ap.rightBrace;
+            argStr += ap.arrayRightBrace;
 
             // Set fill, align and width.
             fill = ap.fill ?? " ";
@@ -259,33 +257,35 @@ export class FormatStringParser {
             totArrayDepth ??= getArrayDepth(arg);
             curArrayDepth ??= 0
 
-            let ap = rf.getArrayPresentation(curArrayDepth, totArrayDepth);
-
-            argStr = ap.leftBrace;
-
+            const ap = rf.getArrayPresentation(curArrayDepth, totArrayDepth);
+            const { mapEntryLeftBrace, mapEntryRightBrace } = ap;
             let i = 0;
+
+            argStr = ap.mapLeftBrace;
 
             for (let key in arg) {
                 if (hasFormattableProperty(arg, key)) {
-                    if (i++ > 0) {
-                        argStr += ap.type === "s" ? "" : ", ";
-                    }
+                    if (i++ > 0 && ap.type !== "s") argStr += ", ";
 
                     let value = this.formatArgument(arg[key], rf, curArrayDepth + 1, totArrayDepth)
 
+                    argStr += mapEntryLeftBrace;
+
                     if (ap.type === "n" || ap.type === "m") {
-                        argStr += key + ": " + value;
+                        argStr += `${key}: ${value}`;
                     }
                     else if (ap.type === "s") {
-                        argStr += key + value;
+                        argStr += `${key}${value}`;
                     }
                     else {
-                        argStr += ap.leftBrace + key + ", " + value + ap.rightBrace;
+                        argStr += `${key}, ${value}`;
                     }
+
+                    argStr += mapEntryRightBrace;
                 }
             }
 
-            argStr += ap.rightBrace;
+            argStr += ap.mapRightBrace;
 
             // Set fill, align and width.
             fill = ap.fill ?? " ";
