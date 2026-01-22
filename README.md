@@ -1,7 +1,8 @@
 # StdFormat - A Powerful TypeScript/JavaScript String Formatter
 
-[GitHub Repo](https://github.com/pahkasoft/std-format) | 
-[NPM Pkg](https://www.npmjs.com/package/std-format)
+[Website](https://pahkasoft.com/std-format) | 
+[GitHub Repository](https://github.com/pahkasoft/std-format) | 
+[NPM Package](https://www.npmjs.com/package/std-format)
 
 ## About
 StdFormat is a TypeScript/JavaScript library for powerful string formatting
@@ -14,57 +15,49 @@ There have been few separate npm packages of this project along the line.
 The recommended and main package is:
 - `std-format` 👍 Use this!
 
-Other two are kept up to date for legacy support, in case someone is using
-them:
+Other two are kept up to date for legacy support:
 - `@sbrockma/std-format`
 - `@tspro/brace-format`
 
-All three packages are equal and work what is written in this documentation.
+All three packages are equal and work along with this documentation.
 
 > IIFE Note: Global name `StdFormat` is declared by all three variants.
 > `@tspro/brace-format` declares additional alias `BraceFormat` for legacy
 > support.
 
 ## Project Status
-This project is now in maintenance. I will fix bugs and add features on request.
+
+This project is now in maintenance.
 
 ## Install
-`npm i std-format`
+`npm install std-format`
 
 ## Usage
 
-### Import (ESM)
+### Import
 
 ```js
-// Import default export
-import StdFormat from "std-format";
-
-StdFormat.format("{}, {}!", "Hello", "world");
-
-// Or import named exports
 import { format, int, float, setLocale, FormatError } from "std-format";
-
-format("{}, {}!", "Hello", "world");
 ```
 
-### Require (CommonJS)
+### Require
 
 ```js
-const StdFormat = require("std-format");
-
-StdFormat.format("...");
+const { format, int, float, setLocale, FormatError } = require("std-format");
 ```
 
 ### Browser Script
 Use the standalone IIFE bundle via `unpkg` or `jsdelivr` cdn.
 
 ```html
+<!-- unpkg... -->
 <script src="https://unpkg.com/std-format@4.1.0/dist/index.global.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/std-format@4.1.0/dist/index.global.js"></script>
+
+<!-- jsDelivr -->
+ <script src="https://cdn.jsdelivr.net/npm/std-format@4.1.0/dist/index.global.js"></script>
 
 <script>
-    const { format } = window.StdFormat;
-    var str = format("{}, {}!", "Hello", "world");
+    const { format, int, float, setLocale, FormatError } = window.StdFormat;
 </script>
 ```
 
