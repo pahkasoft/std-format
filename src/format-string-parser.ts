@@ -238,14 +238,14 @@ export class FormatStringParser {
 
             const ap = rf.getArrayPresentation(curArrayDepth, totArrayDepth);
 
-            argStr = ap.arrayLeftBrace;
+            argStr = ap.arrLeftBrace;
 
             for (let i = 0; i < arg.length; i++) {
                 if (i > 0 && ap.type !== "s") argStr += ", ";
                 argStr += this.formatArgument(arg[i], rf, curArrayDepth + 1, totArrayDepth);
             }
 
-            argStr += ap.arrayRightBrace;
+            argStr += ap.arrRightBrace;
 
             // Set fill, align and width.
             fill = ap.fill ?? " ";
@@ -258,10 +258,10 @@ export class FormatStringParser {
             curArrayDepth ??= 0
 
             const ap = rf.getArrayPresentation(curArrayDepth, totArrayDepth);
-            const { mapEntryLeftBrace, mapEntryRightBrace } = ap;
+            const { objPropLeftBrace, objPropRightBrace } = ap;
             let i = 0;
 
-            argStr = ap.mapLeftBrace;
+            argStr = ap.objLeftBrace;
 
             for (let key in arg) {
                 if (hasFormattableProperty(arg, key)) {
@@ -269,7 +269,7 @@ export class FormatStringParser {
 
                     let value = this.formatArgument(arg[key], rf, curArrayDepth + 1, totArrayDepth)
 
-                    argStr += mapEntryLeftBrace;
+                    argStr += objPropLeftBrace;
 
                     if (ap.type === "n" || ap.type === "m") {
                         argStr += `${key}: ${value}`;
@@ -281,11 +281,11 @@ export class FormatStringParser {
                         argStr += `${key}, ${value}`;
                     }
 
-                    argStr += mapEntryRightBrace;
+                    argStr += objPropRightBrace;
                 }
             }
 
-            argStr += ap.mapRightBrace;
+            argStr += ap.objRightBrace;
 
             // Set fill, align and width.
             fill = ap.fill ?? " ";

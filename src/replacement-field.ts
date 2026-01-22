@@ -123,7 +123,7 @@ export class ArrayPresentation extends PresentationParser {
         }
     }
 
-    get arrayLeftBrace(): string {
+    get arrLeftBrace(): string {
         switch (this.type) {
             case "n": case "s": return "";
             case "b": return "{";
@@ -131,7 +131,7 @@ export class ArrayPresentation extends PresentationParser {
         }
     }
 
-    get arrayRightBrace(): string {
+    get arrRightBrace(): string {
         switch (this.type) {
             case "n": case "s": return "";
             case "b": return "}";
@@ -139,7 +139,7 @@ export class ArrayPresentation extends PresentationParser {
         }
     }
 
-    get mapLeftBrace(): string {
+    get objLeftBrace(): string {
         switch (this.type) {
             case "n": case "s": return "";
             case "m": case "b": return "{";
@@ -147,7 +147,7 @@ export class ArrayPresentation extends PresentationParser {
         }
     }
 
-    get mapRightBrace(): string {
+    get objRightBrace(): string {
         switch (this.type) {
             case "n": case "s": return "";
             case "m": case "b": return "}";
@@ -155,7 +155,7 @@ export class ArrayPresentation extends PresentationParser {
         }
     }
 
-    get mapEntryLeftBrace(): string {
+    get objPropLeftBrace(): string {
         switch (this.type) {
             case "n": case "s": case "m": return "";
             case "b": return "{";
@@ -163,7 +163,7 @@ export class ArrayPresentation extends PresentationParser {
         }
     }
 
-    get mapEntryRightBrace(): string {
+    get objPropRightBrace(): string {
         switch (this.type) {
             case "n": case "s": case "m": return "";
             case "b": return "}";
