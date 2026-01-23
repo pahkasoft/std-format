@@ -51,10 +51,10 @@ Use the standalone IIFE bundle via `unpkg` or `jsdelivr` cdn.
 
 ```html
 <!-- unpkg... -->
-<script src="https://unpkg.com/std-format@4.1.0/dist/index.global.js"></script>
+<script src="https://unpkg.com/std-format@4.1.1/dist/index.global.js"></script>
 
 <!-- jsDelivr -->
- <script src="https://cdn.jsdelivr.net/npm/std-format@4.1.0/dist/index.global.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/std-format@4.1.1/dist/index.global.js"></script>
 
 <script>
     const { format, int, float, setLocale, FormatError } = window.StdFormat;
