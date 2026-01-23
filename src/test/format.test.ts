@@ -978,8 +978,8 @@ describe("Testing BraceFormat", () => {
         expect(format("{:n:d}", { A: 65, B: 66 })).toEqual("A: 65, B: 66");
         expect(format("{:n:d}", new Map([["A", 65], ["B", 66]]))).toEqual("A: 65, B: 66");
 
-        expect(format("{:m:d}", { A: 65, B: 66 })).toEqual("[A: 65, B: 66]");
-        expect(format("{:m:d}", new Map([["A", 65], ["B", 66]]))).toEqual("[A: 65, B: 66]");
+        expect(format("{:m:d}", { A: 65, B: 66 })).toEqual("{A: 65, B: 66}");
+        expect(format("{:m:d}", new Map([["A", 65], ["B", 66]]))).toEqual("{A: 65, B: 66}");
 
         expect(format("{:s:d}", { A: 65, B: 66 })).toEqual("A65B66");
         expect(format("{:s:d}", new Map([["A", 65], ["B", 66]]))).toEqual("A65B66");
@@ -991,7 +991,7 @@ describe("Testing BraceFormat", () => {
         expect(format("{:*^24:d}", { A: 65, B: 66 })).toEqual("***[[A, 65], [B, 66]]***");
         expect(format("{:*>24:d}", { A: 65, B: 66 })).toEqual("******[[A, 65], [B, 66]]");
 
-        expect(format("{:m:}", { x: 1, y: -1 })).toEqual("[x: 1.0, y: -1.0]");
+        expect(format("{:m:}", { x: 1, y: -1 })).toEqual("{x: 1.0, y: -1.0}");
 
         class TestClass { a = 0; b = 1; }
         expect(format("{:d}", new TestClass())).toEqual("[[a, 0], [b, 1]]");
