@@ -19,6 +19,32 @@ export function zeroArray(zeroCount: number): 0[] {
     return new Array<0>(zeroCount).fill(0);
 }
 
+// Insert zeroes to start of array, work in copy.
+export function insertZeroesStart(arr: number[], zeroCount: number) {
+    assert(zeroCount >= 0, "zeroCount < 0");
+    const res = new Array<number>(zeroCount).fill(0);
+    for (let i = 0; i < arr.length; i++) res.push(arr[i]);
+    return res;
+}
+
+// Insert zeroes to end of array, work in copy.
+export function insertZeroesEnd(arr: number[], zeroCount: number) {
+    assert(zeroCount >= 0, "zeroCount < 0");
+    const res = arr.slice();    // Duplicate array
+    for (let i = 0; i < zeroCount; i++) res.push(0);
+    return res;
+}
+
+// Insert zeroes to array, work in copy.
+export function insertZeroes(arr: number[], start: number, zeroCount: number): number[] {
+    assert(zeroCount >= 0, "zeroCount < 0");
+    const res = arr.slice(0, start);    // elements before `start`
+    const end = arr.slice(start);       // elements after `start`
+    for (let i = 0; i < zeroCount; i++) res.push(0);   // insert zeros
+    for (let i = 0; i < end.length; i++) res.push(end[i]);      // append rest
+    return res;
+}
+
 // Function to convert digit value to digit character.
 export function mapDigitToChar(d: number) {
     return "0123456789abcdef".charAt(d);
@@ -32,4 +58,11 @@ export function isInteger(n: unknown): n is number {
 // Is number negative. For number -0 is negative and +0 is positive.
 export function isNegative(n: number): boolean {
     return n < 0 || 1.0 / n === -Infinity;
+}
+
+export function arrayFind<T>(arr: T[], fn: (t: T) => boolean): T | undefined {
+    for (let i = 0; i < arr.length; i++) {
+        if (fn(arr[i])) return arr[i];
+    }
+    return undefined;
 }

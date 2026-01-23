@@ -1,4 +1,4 @@
-import { assert } from "./utils/common";
+import { arrayFind, assert } from "./utils/common";
 import { LRUCache } from "./utils/LRU-cache";
 
 // Get user/system locale
@@ -53,8 +53,8 @@ export class GroupingInfo {
             const parts = Intl.NumberFormat(locale).formatToParts(1111111111111.111);
 
             // Extract decimal and group separators.
-            let decimalSeparator = parts.find(part => part.type === "decimal")?.value;
-            let groupingSeparator = parts.find(part => part.type === "group")?.value ?? "";
+            let decimalSeparator = arrayFind(parts, part => part.type === "decimal")?.value;
+            let groupingSeparator = arrayFind(parts, part => part.type === "group")?.value ?? "";
 
             // Get integer group sizes of the test value. Order from right to left.
             let groupSizes: number[] = parts.filter(part => part.type === "integer").map(p => p.value.length).reverse();

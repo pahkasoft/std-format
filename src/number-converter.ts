@@ -1,4 +1,4 @@
-import { assert, isInteger, isNegative, zeroArray } from "./utils/common";
+import { assert, insertZeroes, insertZeroesEnd, insertZeroesStart, isInteger, isNegative } from "./utils/common";
 import { ElementPresentation } from "./replacement-field";
 import { FormatStringParser } from "./format-string-parser";
 
@@ -324,13 +324,13 @@ export class NumberConverter {
         // If dot position was moved right past end of digits then
         // add zeroes from the end of digits to dot position.
         if (this.dotPos > this.digits.length) {
-            this.digits.splice(this.digits.length, 0, ...zeroArray(this.dotPos - this.digits.length));
+            this.digits = insertZeroesEnd(this.digits, this.dotPos - this.digits.length);
         }
 
         // If dot position was moved left past first digit then
         // add zeroes to beginning so that dot position becomes 1.
         if (this.dotPos < 1) {
-            this.digits.splice(0, 0, ...zeroArray(1 - this.dotPos));
+            this.digits = insertZeroesStart(this.digits, 1 - this.dotPos);
             this.dotPos = 1;
         }
 
@@ -351,7 +351,7 @@ export class NumberConverter {
         }
         else if (newDigitCount > this.digits.length) {
             // If newDigitCount > digits.length then all that is needed is to add trailing zeroes.
-            this.digits.splice(this.digits.length, 0, ...zeroArray(newDigitCount - this.digits.length));
+            this.digits = insertZeroesEnd(this.digits, newDigitCount - this.digits.length);
             return;
         }
 
@@ -363,7 +363,7 @@ export class NumberConverter {
 
         // And add zeroes from newDigitCount to dotPos
         if (newDigitCount < this.dotPos) {
-            this.digits.splice(newDigitCount, 0, ...zeroArray(this.dotPos - newDigitCount));
+            this.digits = insertZeroes(this.digits, newDigitCount, this.dotPos - newDigitCount);
         }
 
         // Does first removed digit cause rounding up.
@@ -497,7 +497,7 @@ export class NumberConverter {
                 let shiftRight = 3 - firstOneId;
 
                 // Add zeroes to left.
-                binaryDigits.splice(0, 0, ...zeroArray(shiftRight));
+                binaryDigits = insertZeroesStart(binaryDigits, shiftRight) as (0 | 1)[];
 
                 // Remove digits from right.
                 binaryDigits.splice(binaryDigits.length - shiftRight, firstOneId);
