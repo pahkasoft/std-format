@@ -14,7 +14,11 @@ import { GroupingInfo } from "./grouping-info";
  * @param formatArgs - Format arguments, e.g. "Hello" and "world".
  * @returns - Formatted string, e.g. "Hello, world!".
  **/
-export function format(formatString: string, ...formatArgs: unknown[]): string {
+export function format(formatString: string, ...formatArgs: unknown[]): string;
+export function format(formatString: string): string {
+    // Avoid variadic args for older JS support.
+    const formatArgs: unknown[] = Array.prototype.slice.call(arguments, 1);
+
     return FormatStringParser.exec(formatString, formatArgs);
 }
 

@@ -108,7 +108,11 @@ export class FormatStringParser {
     }
 
     // Throw invalid replacement field error.
-    throwInvalidFormatSpecifiers(...specifiers: string[]): never {
+    throwInvalidFormatSpecifiers(...specifiers: string[]): never;
+    throwInvalidFormatSpecifiers(): never {
+        // Avoid variadic args for older JS support.
+        const specifiers: string[] = Array.prototype.slice.call(arguments);
+        
         throw new FormatError(this.getErrorMessage("Invalid format specifiers " + specifiers.map(s => "'" + s + "'").join(" with ")));
     }
 

@@ -26,7 +26,11 @@ abstract class PresentationParser {
     constructor(protected parseStr: string) { }
 
     // Parse fill and align
-    protected parseFillAndAlign(p: FormatStringParser, ...alignChars: string[]): { fill: string | undefined, align: string | undefined } {
+    protected parseFillAndAlign(p: FormatStringParser, ...alignChars: string[]): { fill: string | undefined, align: string | undefined };
+    protected parseFillAndAlign(p: FormatStringParser): { fill: string | undefined, align: string | undefined } {
+        // Avoid variadic args for older JS support.
+        const alignChars: string[] = Array.prototype.slice.call(arguments, 1);
+
         let fill = getValidFillCharAt(this.parseStr, this.parsePos);
         if (fill && this.parseStr.length >= this.parsePos + fill.length + 1 && alignChars.indexOf(this.parseStr[this.parsePos + fill.length]) >= 0) {
             this.parsePos += fill.length;
@@ -41,7 +45,11 @@ abstract class PresentationParser {
     }
 
     // Parse specifier.
-    protected parseSpecifier(p: FormatStringParser, ...specArr: string[]): any {
+    protected parseSpecifier(p: FormatStringParser, ...specArr: string[]): any;
+    protected parseSpecifier(p: FormatStringParser): any { // FIXME: Remove any
+        // Avoid variadic args for older JS support.
+        const specArr: string[] = Array.prototype.slice.call(arguments, 1);
+
         return this.parsePos < this.parseStr.length && specArr.indexOf(this.parseStr[this.parsePos]) >= 0 ? this.parseStr[this.parsePos++] : undefined;
     }
 
@@ -224,7 +232,11 @@ export class ElementPresentation extends PresentationParser {
 
     // Test if type is one of types given as argument.
     // For example isType("", "d", "xX") tests if type is either "", "d", "x" or "X".
-    hasType(...types: string[]) {
+    hasType(...types: string[]): boolean;
+    hasType(): boolean {
+        // Avoid variadic args for older JS support.
+        const types: string[] = Array.prototype.slice.call(arguments);
+
         return types.some(type => this.type === type || this.type !== "" && type.indexOf(this.type) >= 0);
     }
 
