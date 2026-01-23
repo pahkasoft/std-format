@@ -1,9 +1,10 @@
 # Changelog
-## [4.1.1] - 2026-01-??
+## [4.1.1] - 2026-01-23
 ## Fixed
-- Result when formatting object/map with map specifier "m" was not correct.
-- Removed spread operators ... for older JS support.
-- Removed variadic args with ... for older JS support.
+- Incorrect result when formatting objects/maps with specifier "m".
+- Improved ES5 support:
+    - Removed spread operators (...arr).
+    - Removed variadic args (...args).
 
 ## [4.1.0] - 2025-11-22
 ### Changed
