@@ -2,7 +2,8 @@
 ## [4.1.1] - 2026-01-??
 ## Fixed
 - Result when formatting object/map with map specifier "m" was not correct.
-- Removed spread operators for older browser support.
+- Removed spread operators ... for older JS support.
+- Removed variadic args with ... for older JS support.
 
 ## [4.1.0] - 2025-11-22
 ### Changed
