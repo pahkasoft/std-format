@@ -46,7 +46,7 @@ abstract class PresentationParser {
 
     // Parse specifier.
     protected parseSpecifier(p: FormatStringParser, ...specArr: string[]): any;
-    protected parseSpecifier(p: FormatStringParser): any { // FIXME: Remove any
+    protected parseSpecifier(p: FormatStringParser): any {
         // Avoid variadic args for older JS support.
         const specArr: string[] = Array.prototype.slice.call(arguments, 1);
 
