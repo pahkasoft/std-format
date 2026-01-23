@@ -26,11 +26,13 @@ const configEntries: { entry: Record<string, string>, format: Format }[] = [
 ];
 
 const tsupConfig: Options[] = configEntries.map((cfg, cfgId) => {
+    const target = cfg.format === 'esm' ? 'es2015' : 'es5';
+
     return {
         clean: cfgId === 0,
         entry: cfg.entry,
         outDir: DIST_PATH,
-        target: cfg.format === 'esm' ? 'es2015' : 'es5',
+        target,
         format: cfg.format,
         globalName: cfg.format === 'iife' ? "StdFormat" : undefined,
         dts: cfg.format === 'cjs',
@@ -71,7 +73,9 @@ const tsupConfig: Options[] = configEntries.map((cfg, cfgId) => {
             return { js: '.js' }
         },
         esbuildOptions(options) {
-            options.inject = ['./src/polyfills.ts'];
+            if (target === 'es5') {
+                options.inject = ['./src/polyfills.ts'];
+            }
         },
     }
 });
