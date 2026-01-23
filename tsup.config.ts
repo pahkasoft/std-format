@@ -70,6 +70,9 @@ const tsupConfig: Options[] = configEntries.map((cfg, cfgId) => {
             if (format === 'iife') return { js: ".js" };
             return { js: '.js' }
         },
+        esbuildOptions(options) {
+            options.inject = ['./src/polyfills.ts'];
+        },
     }
 });
 
