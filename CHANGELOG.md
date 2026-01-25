@@ -1,4 +1,6 @@
 # Changelog
+## [Unreleased]
+
 ## [4.1.1] - 2026-01-23
 ## Fixed
 - Incorrect result when formatting objects/maps with specifier "m".
